@@ -399,22 +399,22 @@ var listen_and_respond_procedure = {
         {
             "file": function () { return trial_stimuli.file[0] },
             "melody": function () { return trial_stimuli.name[0] },
-            "range": trial_stimuli.range
+            "range": function () { return trial_stimuli.range }
         },
         {
             "file": function () { return trial_stimuli.file[1] },
             "melody": function () { return trial_stimuli.name[1] },
-            "range": trial_stimuli.range
+            "range": function () { return trial_stimuli.range }
         },
         {
             "file": function () { return trial_stimuli.file[2] },
             "melody": function () { return trial_stimuli.name[2] },
-            "range": trial_stimuli.range
+            "range": function () { return trial_stimuli.range }
         },
         {
             "file": function () { return trial_stimuli.file[3] },
             "melody": function () { return trial_stimuli.name[3] },
-            "range": trial_stimuli.range
+            "range": function () { return trial_stimuli.range }
         }
     ],
     randomize_order: true
