@@ -315,7 +315,7 @@ var trial_response = {
     on_finish: function (data) {
         // filename example: 1234-seed_1-high.webm
         // EDIT FOR EACH GENERATION
-        const filename = `gen_0/trial_data/${subject_id}-${data.melody}-${data.range}.webm`;
+        const filename = `${subject_id}-${data.melody}-${data.range}.webm`;
         jsPsychPipe.saveBase64Data("QfKXr6jPLyzT", filename, data.response);
         // delete the base64 data to save space. store the filename instead.
         data.response = null;
