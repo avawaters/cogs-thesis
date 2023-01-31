@@ -82,7 +82,7 @@ var full_debrief = {
 /************************************* EVENTS FOR MELODY GENERATION  *************************************/
 var instructions = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: "<p>In this experiment, you will listen to 4 melodies, each played three times.</p><p>On the third time, a microphone will pop up on the screen immediately after. When you see it, sing (using the syllable 'ta') the pitch of what you think the next note is and for how long you think the note will last.</p><p>To help with the rhythm anf timing, you may want to sing the end of the melody.<p>At the end of each trial, you will be asked to rate how confident you are that the note you sang is what comes next in the melody.</p>To continue, hit the 'Next' button'.",
+    stimulus: "<p>In this experiment, you will listen to 4 melodies, each played three times.</p><p>On the third time, a microphone will pop up on the screen immediately after. When you see it, sing (using the syllable 'ta') the pitch of what you think the next note is and for how long you think the note will last.</p><p>To help with the rhythm and timing, you may want to sing the end of the melody.<p>At the end of each trial, you will be asked to rate how confident you are that the note you sang is what comes next in the melody.</p>To continue, hit the 'Next' button'.",
     choices: ["Next"]
 };
 
