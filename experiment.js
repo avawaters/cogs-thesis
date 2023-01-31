@@ -171,14 +171,14 @@ var pitch_matching_instructions = {
 var pitch_matching_tone = {
     type: jsPsychAudioKeyboardResponse,
     stimulus: jsPsych.timelineVariable("file"),
-    prompt: "<img src='note.png' widtht=500, height=500></img>",
+    prompt: "<img src='images/note.png' widtht=500, height=500></img>",
     choices: "NO_KEYS",
     trial_ends_after_audio: true
 };
 
 var pitch_matching_response = {
     type: jsPsychHtmlAudioResponse,
-    stimulus: "<img src='mic.png' width=400, height=500></img>",
+    stimulus: "<img src='images/mic.png' width=400, height=500></img>",
     recording_duration: 1500,
     show_done_button: false,
     post_trial_gap: 2000,
@@ -189,7 +189,7 @@ var pitch_matching_response = {
     on_finish: function (data) {
         // filename example: 1234-A2.webm
         // EDIT FOR EACH GENERATION
-        const filename = `gen_0/pitch_matching/${subject_id}-${data.pitch}.webm`;
+        const filename = `${subject_id}-${data.pitch}.webm`;
         jsPsychPipe.saveBase64Data("QfKXr6jPLyzT", filename, data.response);
         // delete the base64 data to save space. store the filename instead.
         data.response = null;
@@ -298,14 +298,14 @@ var listen_intermission = {
 var trial_melody = {
     type: jsPsychAudioKeyboardResponse,
     stimulus: jsPsych.timelineVariable("file"),
-    prompt: "<img src='notes.png'></img>",
+    prompt: "<img src='images/notes.png'></img>",
     choices: "NO_KEYS",
     trial_ends_after_audio: true
 };
 
 var trial_response = {
     type: jsPsychHtmlAudioResponse,
-    stimulus: "<img src='mic.png' width='400', height='500'></img>",
+    stimulus: "<img src='images/mic.png' width='400', height='500'></img>",
     recording_duration: 3000,
     show_done_button: false,
     data: {
