@@ -116,9 +116,13 @@ var init_mic = {
 
 timeline.push(init_mic, volume_calibration);
 
-function get_name(s) {
+function get_pitch(s) {
     return s.split('-')[1].split('.')[0]
 };
+
+function get_melody(s) {
+    return s.split('-')[0].split('/')[2]
+}
 
 // Event to find singing range and populate stimuli
 var range_q = {
@@ -131,7 +135,7 @@ var range_q = {
         if (data.response == 1) {
             pitch_matching_stimuli = {
                 file: low_pitch_matching,
-                name: low_pitch_matching.map(get_name),
+                name: low_pitch_matching.map(get_pitch),
                 hz: low_pitch_matching_hz
             };
             practice_stimulus = {
@@ -140,14 +144,14 @@ var range_q = {
             };
             trial_stimuli = {
                 file: low_stimuli,
-                name: low_stimuli.map(get_name)
+                name: low_stimuli.map(get_melody)
             }
         }
         // High stimuli
         else {   
             pitch_matching_stimuli = {
                 file: high_pitch_matching,
-                name: high_pitch_matching.map(get_name),
+                name: high_pitch_matching.map(get_pitch),
                 hz: high_pitch_matching_hz
             };
             practice_stimulus = {
@@ -156,7 +160,7 @@ var range_q = {
             };
             trial_stimuli = {
                 file: high_stimuli,
-                name: high_stimuli.map(get_name)
+                name: high_stimuli.map(get_melody)
             }
         }
     }
@@ -316,6 +320,7 @@ var trial_response = {
     on_finish: function (data) {
         // filename example: gen0-1234-seed_1.webm
         // EDIT FOR EACH GENERATION
+        console.log(jsPsych.timelineVariable("melody"));
         const filename = `test-${subject_id}-${data.melody}.webm`;
         jsPsychPipe.saveBase64Data("QfKXr6jPLyzT", filename, data.response);
         // delete the base64 data to save space. store the filename instead.
