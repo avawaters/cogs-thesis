@@ -24,7 +24,7 @@ var high_stimuli = ["stimuli/high/seed_1-gen_0-high.mp3", "stimuli/high/seed_2-g
 // Capture info from Prolific
 //const subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
 const subject_id = jsPsych.randomization.randomID(10);
-const fname = `${subject_id}.json`;
+const fname = `test-${subject_id}.json`;
 
 //jsPsych.data.addProperties({ subject_id: subject_id });
 
@@ -374,7 +374,7 @@ var practice_trial = {
     timeline_variables: [
         {
             "file": function () { return practice_stimulus.file },
-            "pitch": function() { return practice_stimulus.name }
+            "melody": function() { return practice_stimulus.name }
         }
     ]
 };
