@@ -104,7 +104,7 @@ var no_consent = {
 var conditional_consent_q = {
     timeline: [no_consent],
     conditional_function: function () {
-        return (jsPsych.data.get().last(1).values()[0].response) == 1;
+        return (jsPsych.data.get().last(1).values()[0].response == 1);
     }
 };
 
@@ -115,6 +115,10 @@ var init_mic = {
 };
 
 timeline.push(init_mic, volume_calibration);
+
+function get_name(s) {
+    return s.split('-')[1].split('.')[0]
+};
 
 // Event to find singing range and populate stimuli
 var range_q = {
@@ -127,7 +131,7 @@ var range_q = {
         if (data.response == 1) {
             pitch_matching_stimuli = {
                 file: low_pitch_matching,
-                name: low_pitch_matching.map(function (s) { return s.split('-')[1].split('.')[0] }),
+                name: low_pitch_matching.map(get_name),
                 hz: low_pitch_matching_hz
             };
             practice_stimulus = {
@@ -136,15 +140,14 @@ var range_q = {
             };
             trial_stimuli = {
                 file: low_stimuli,
-                name: low_stimuli.map(function (s) { return s.split('/')[1].split('-')[0] }),
-                range: "low"
+                name: low_stimuli.map(get_name)
             }
         }
         // High stimuli
         else {   
             pitch_matching_stimuli = {
                 file: high_pitch_matching,
-                name: high_pitch_matching.map(function (s) { return s.split('-')[1].split('.')[0] }),
+                name: high_pitch_matching.map(get_name),
                 hz: high_pitch_matching_hz
             };
             practice_stimulus = {
@@ -153,8 +156,7 @@ var range_q = {
             };
             trial_stimuli = {
                 file: high_stimuli,
-                name: high_stimuli.map(function (s) { return s.split('/')[1].split('-')[0] }),
-                range: "high"
+                name: high_stimuli.map(get_name)
             }
         }
     }
@@ -187,9 +189,9 @@ var pitch_matching_response = {
         hz: jsPsych.timelineVariable("hz")
     },
     on_finish: function (data) {
-        // filename example: 1234-A2.webm
+        // filename example: gen0-1234-A2.webm
         // EDIT FOR EACH GENERATION
-        const filename = `${subject_id}-${data.pitch}.webm`;
+        const filename = `test-${subject_id}-${data.pitch}.webm`;
         jsPsychPipe.saveBase64Data("QfKXr6jPLyzT", filename, data.response);
         // delete the base64 data to save space. store the filename instead.
         data.response = null;
@@ -260,7 +262,7 @@ var lessons_cont_qs = {
 var conditional_qs = {
     timeline: [lessons_cont_qs],
     conditional_function: function () {
-        return (jsPsych.data.get().last(1).values()[0].response.Q0) == 'Yes';
+        return (jsPsych.data.get().last(1).values()[0].response.Q0 == 'Yes');
     }
 };
 
@@ -309,13 +311,12 @@ var trial_response = {
     recording_duration: 3000,
     show_done_button: false,
     data: {
-        melody: jsPsych.timelineVariable("melody"),
-        range: jsPsych.timelineVariable("range")
+        melody: jsPsych.timelineVariable("melody")
     },
     on_finish: function (data) {
-        // filename example: 1234-seed_1-high.webm
+        // filename example: gen0-1234-seed_1.webm
         // EDIT FOR EACH GENERATION
-        const filename = `${subject_id}-${data.melody}-${data.range}.webm`;
+        const filename = `test-${subject_id}-${data.melody}.webm`;
         jsPsychPipe.saveBase64Data("QfKXr6jPLyzT", filename, data.response);
         // delete the base64 data to save space. store the filename instead.
         data.response = null;
@@ -409,23 +410,19 @@ var listen_and_respond_procedure = {
     timeline_variables: [
         {
             "file": function () { return trial_stimuli.file[0] },
-            "melody": function () { return trial_stimuli.name[0] },
-            "range": function () { return trial_stimuli.range }
+            "melody": function () { return trial_stimuli.name[0] }
         },
         {
             "file": function () { return trial_stimuli.file[1] },
-            "melody": function () { return trial_stimuli.name[1] },
-            "range": function () { return trial_stimuli.range }
+            "melody": function () { return trial_stimuli.name[1] }
         },
         {
             "file": function () { return trial_stimuli.file[2] },
-            "melody": function () { return trial_stimuli.name[2] },
-            "range": function () { return trial_stimuli.range }
+            "melody": function () { return trial_stimuli.name[2] }
         },
         {
             "file": function () { return trial_stimuli.file[3] },
-            "melody": function () { return trial_stimuli.name[3] },
-            "range": function () { return trial_stimuli.range }
+            "melody": function () { return trial_stimuli.name[3] }
         }
     ],
     randomize_order: true
