@@ -333,11 +333,13 @@ var confidence_response = {
     questions: [
         {
             prompt: "On a scale of 1-7, how confident are you that the pitch you sang is how the melody continues?",
-            labels: ["1\n(note was practically\nchosen at random)", "2", "3", "4", "5", "6", "7\n(very confident)"]
+            labels: ["1\n(note was practically\nchosen at random)", "2", "3", "4", "5", "6", "7\n(very confident)"],
+            required: true
         }
     ],
     data: {
-        task: "confidence"
+        task: "confidence",
+        melody: jsPsych.timelineVariable("melody")
     }
 };
 
