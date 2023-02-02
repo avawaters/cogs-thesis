@@ -391,17 +391,6 @@ const save_data = {
     filename: fname,
     data_string: ()=>jsPsych.data.get().json()
   };
-// var save_server_data = {
-//     type: jsPsychCallFunction,
-//     func: function () {
-//         var data = jsPsych.data.get().json();
-//         var xhr = new XMLHttpRequest();
-//         xhr.open("POST", "php/save_json.php");
-//         xhr.setRequestHeader("Content-Type", "application/json");
-//         xhr.send(JSON.stringify({ filedata: data }));
-//     },
-//     post_trial_gap: 1000
-// };
 
 // Determine when to save data (after all 4 trials)
 var conditional_save_data = {
