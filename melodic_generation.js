@@ -43,26 +43,17 @@ var welcome = {
 
 timeline.push(welcome);
 
+var instructions = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: "<p>In this experiment, you will listen to 4 melodies, each played three times.</p><p>On the third time, a microphone will pop up on the screen immediately after. When you see it, sing (using the syllable 'ta') the pitch of what you think the next note is and for how long you think the note will last.</p><p>To help with the rhythm and timing, you may want to sing the end of the melody.<p>At the end of each trial, you will be asked to rate how confident you are that the note you sang is what comes next in the melody.</p>To continue, hit the 'Next' button'.",
+    choices: ["Next"]
+};
+
 var housekeeping = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: "Now for some housekeeping...",
     choices: "NO_KEYS",
     trial_duration: 2000,
-};
-
-// Event to adjust volume
-var volume_calibration = {
-    type: jsPsychAudioButtonResponse,
-    stimulus: "stimuli/volume_cal.mp3",
-    prompt: "<p>As you hear the music, please adjust your volume to a comfortable level.</p>Click the button to continue.",
-    choices: ["Continue"],
-};
-
-/************************************* EVENTS FOR MELODY GENERATION  *************************************/
-var instructions = {
-    type: jsPsychHtmlButtonResponse,
-    stimulus: "<p>In this experiment, you will listen to 4 melodies, each played three times.</p><p>On the third time, a microphone will pop up on the screen immediately after. When you see it, sing (using the syllable 'ta') the pitch of what you think the next note is and for how long you think the note will last.</p><p>To help with the rhythm and timing, you may want to sing the end of the melody.<p>At the end of each trial, you will be asked to rate how confident you are that the note you sang is what comes next in the melody.</p>To continue, hit the 'Next' button'.",
-    choices: ["Next"]
 };
 
 timeline.push(instructions, housekeeping);
@@ -91,6 +82,14 @@ timeline.push(consent_q, conditional_consent_q);
 
 var init_mic = {
     type: jsPsychInitializeMicrophone
+};
+
+// Event to adjust volume
+var volume_calibration = {
+    type: jsPsychAudioButtonResponse,
+    stimulus: "stimuli/volume_cal.mp3",
+    prompt: "<p>As you hear the music, please adjust your volume to a comfortable level.</p>Click the button to continue.",
+    choices: ["Continue"],
 };
 
 timeline.push(init_mic, volume_calibration);
