@@ -1,27 +1,27 @@
-// Load jsPsych
+// load jsPsych
 var jsPsych = initJsPsych({});
 
-// Timeline that holds javascript variables
+// timeline that holds javascript variables
 var timeline = [];
 
-// Variables that hold the correct stimuli depending on singing range
+// variables that hold the correct stimuli depending on singing range
 var pitch_matching_stimuli;
 var practice_stimulus;
 var trial_stimuli;
 
-// Arrays holding information for low stimuli
+// arrays holding information for low stimuli
 var low_pitch_matching = ["stimuli/pitch_matching/pitch_matching-A2.mp3", "stimuli/pitch_matching/pitch_matching-D3.mp3", "stimuli/pitch_matching/pitch_matching-G3.mp3"];
 var low_pitch_matching_hz = [110, 146.83, 196];
 var low_stimuli = ["stimuli/low/seed_1-gen_0-low.mp3", "stimuli/low/seed_2-gen_0-low.mp3", "stimuli/low/seed_3-gen_0-low.mp3", "stimuli/low/seed_4-gen_0-low.mp3"];
 
 
-// Arrays holding information for high stimuli
+// arrays holding information for high stimuli
 var high_pitch_matching = ["stimuli/pitch_matching/pitch_matching-A3.mp3", "stimuli/pitch_matching/pitch_matching-D4.mp3", "stimuli/pitch_matching/pitch_matching-G4.mp3"];
 var high_pitch_matching_hz = [220, 293.66, 392];
 var high_stimuli = ["stimuli/high/seed_1-gen_0-high.mp3", "stimuli/high/seed_2-gen_0-high.mp3", "stimuli/high/seed_3-gen_0-high.mp3", "stimuli/high/seed_4-gen_0-high.mp3"];
 
 
-// Capture info from Prolific
+// capture info from Prolific
 //const subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
 const subject_id = jsPsych.randomization.randomID(10);
 const fname = `test-${subject_id}.json`;
@@ -58,7 +58,7 @@ var housekeeping = {
 
 timeline.push(instructions, housekeeping);
 
-// Event to obtain consent to use microphone
+// obtain consent to use microphone
 var consent_q = {
     type: jsPsychHtmlButtonResponse,
     stimulus: "This experiment involves recording audio. Do you consent to the use of this device's microphone?",
@@ -84,7 +84,7 @@ var init_mic = {
     type: jsPsychInitializeMicrophone
 };
 
-// Event to adjust volume
+// adjust volume
 var volume_calibration = {
     type: jsPsychAudioButtonResponse,
     stimulus: "stimuli/volume_cal.mp3",
@@ -102,14 +102,14 @@ function get_melody(s) {
     return s.split('-')[0].split('/')[2]
 }
 
-// Event to find singing range and populate stimuli
+// select singing range and populate stimuli
 var range_q = {
     type: jsPsychAudioButtonResponse,
     stimulus: "stimuli/range.mp3",
     choices: ["Higher", "Lower"],
     prompt: "Which is the more comfortable singing range for you?",
     on_finish: function (data) {
-        // Low stimuli
+        // low stimuli
         if (data.response == 1) {
             pitch_matching_stimuli = {
                 file: low_pitch_matching,
@@ -125,7 +125,7 @@ var range_q = {
                 name: low_stimuli.map(get_melody)
             }
         }
-        // High stimuli
+        // high stimuli
         else {   
             pitch_matching_stimuli = {
                 file: high_pitch_matching,
@@ -204,6 +204,7 @@ var pitch_matching_procedure = {
 
 timeline.push(pitch_matching_instructions, pitch_matching_procedure);
 
+// collect info about musical training experience
 var lessons_q_preamble = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: "Great! One last thing before the practice trial...",
@@ -298,7 +299,6 @@ var trial_response = {
     on_finish: function (data) {
         // filename example: gen0-1234-seed_1.webm
         // EDIT FOR EACH GENERATION
-        console.log(jsPsych.timelineVariable("melody"));
         const filename = `test-${subject_id}-${data.melody}.webm`;
         jsPsychPipe.saveBase64Data("QfKXr6jPLyzT", filename, data.response);
         // delete the base64 data to save space. store the filename instead.
@@ -327,7 +327,7 @@ var trial_intermission = {
     choices: ["Next"]
 };
 
-// Determine when to display intermission (trials 1-3)
+// determine when to display intermission (trials 1-3)
 var conditional_intermission = {
     timeline: [trial_intermission],
     conditional_function: function () {
@@ -348,7 +348,7 @@ var practice_end = {
     choices: ["Start"]
 };
 
-// Event to run practice trial
+// run practice trial
 var practice_trial = {
     timeline: [practice_instructions, first_listen, trial_melody, listen_intermission, second_listen, trial_melody, listen_intermission, third_listen, trial_melody, trial_response, confidence_response, practice_end],
     timeline_variables: [
@@ -361,7 +361,7 @@ var practice_trial = {
 
 timeline.push(practice_trial);
 
-// Save data
+// save data
 const save_data = {
     type: jsPsychPipe,
     action: "save",
@@ -370,7 +370,7 @@ const save_data = {
     data_string: ()=>jsPsych.data.get().json()
   };
 
-// Determine when to save data (after all 4 trials)
+// determine when to save data (after all 4 trials)
 var conditional_save_data = {
     timeline: [save_data],
     conditional_function: function () {
@@ -378,7 +378,7 @@ var conditional_save_data = {
     }
 };
 
-// Event to run experimental trials
+// run experimental trials
 var listen_and_respond_procedure = {
     timeline: [first_listen, trial_melody, listen_intermission, second_listen, trial_melody, listen_intermission, third_listen, trial_melody, trial_response, confidence_response, conditional_intermission, conditional_save_data],
     timeline_variables: [
@@ -404,7 +404,7 @@ var listen_and_respond_procedure = {
 
 timeline.push(listen_and_respond_procedure);
 
-// Event to debrief the participant at the end of the experimentt
+// debrief the participant at the end of the experimentt
 var debrief = {
     type: jsPsychHtmlButtonResponse,
     stimulus: "<p>Thanks for participating in my experiment!</p>If you would like to learn more about it, click the 'Tell Me More!' button.<p>Otherwise, click the 'Back to Prolific' button to complete the study.</p>",
@@ -417,7 +417,7 @@ var debrief = {
     }
 };
 
-// Event to give detailed debriefing to participant
+// give detailed debriefing to participant
 var full_debrief = {
     type: jsPsychHtmlKeyboardResponse,
     // When the melodies diverge: You heard two melodies that continued in an unpredictable way and two that continued in a predictable way. Your responses will be used to determine how the melody should continue past this point, filling them in with the most predictable notes. Once the melodies are complete, 
