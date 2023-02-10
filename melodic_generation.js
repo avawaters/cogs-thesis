@@ -58,27 +58,6 @@ var volume_calibration = {
     choices: ["Continue"],
 };
 
-// Event to debrief the participant at the end of the experimentt
-var debrief = {
-    type: jsPsychHtmlButtonResponse,
-    stimulus: "<p>Thanks for participating in my experiment!</p>If you would like to learn more about it, click the 'Tell Me More!' button.<p>Otherwise, click the 'Back to Prolific' button to complete the study.</p>",
-    choices: ["Tell Me More!", "Back to Prolific"],
-    // Get button selected
-    on_finish: function (data) {
-        if (data.response == 1) {
-            window.location.href = "https://www.vassar.edu/";
-        }
-    }
-};
-
-// Event to give detailed debriefing to participant
-var full_debrief = {
-    type: jsPsychHtmlKeyboardResponse,
-    // When the melodies diverge: You heard two melodies that continued in an unpredictable way and two that continued in a predictable way. Your responses will be used to determine how the melody should continue past this point, filling them in with the most predictable notes. Once the melodies sound complete, 
-    stimulus: "<p>This experiment is exploring the relationship between melodic predictability and listener pleasure. You are a part of the group that is writing these melodies. Your responses will help determine what the predictable notes are, and at one point where there is a strong sense of what note comes next, the melody will continue a different way. After the melodies have been continued past this point of divergence, another group of participants will rate how much they enjoy all 8 melodies (predictable and unpredictable versions of 4 different melodies). Their responses will be analyzed to investigate if there is any relationship between their ratings and whether the melody had a point of unpredictability or not. </p><a href='https://www.vassar.edu/'>CLICK HERE</a> to return to Prolific and complete the study",
-    choices: "NO_KEYS"
-};
-
 /************************************* EVENTS FOR MELODY GENERATION  *************************************/
 var instructions = {
     type: jsPsychHtmlButtonResponse,
@@ -426,6 +405,34 @@ var listen_and_respond_procedure = {
 
 timeline.push(listen_and_respond_procedure);
 
-timeline.push(debrief, full_debrief);
+// Event to debrief the participant at the end of the experimentt
+var debrief = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: "<p>Thanks for participating in my experiment!</p>If you would like to learn more about it, click the 'Tell Me More!' button.<p>Otherwise, click the 'Back to Prolific' button to complete the study.</p>",
+    choices: ["Tell Me More!", "Back to Prolific"],
+    // Get button selected
+    on_finish: function (data) {
+        if (data.response == 1) {
+            window.location.href = "https://www.vassar.edu/";
+        }
+    }
+};
+
+// Event to give detailed debriefing to participant
+var full_debrief = {
+    type: jsPsychHtmlKeyboardResponse,
+    // When the melodies diverge: You heard two melodies that continued in an unpredictable way and two that continued in a predictable way. Your responses will be used to determine how the melody should continue past this point, filling them in with the most predictable notes. Once the melodies are complete, 
+    stimulus: "<p>This experiment is exploring the relationship between melodic predictability and listener pleasure. You are a part of the group that is writing these melodies. Your responses will help determine what the predictable notes are, and at one point where there is a strong sense of what note comes next, the melody will continue a different way. After the melodies have been continued past this point of divergence, another group of participants will rate how much they enjoy all 8 melodies (predictable and unpredictable versions of 4 different melodies). Their responses will be analyzed to investigate if there is any relationship between their ratings and whether the melody had a point of unpredictability or not. </p><a href='https://www.vassar.edu/'>CLICK HERE</a> to return to Prolific and complete the study.",
+    choices: "NO_KEYS"
+};
+
+var conditional_full_debrief = {
+    timeline: [full_debrief],
+    conditional_function: function () {
+        return (jsPsych.data.get().last(1).values()[0].response.Q0 == 0);
+    }
+}
+
+timeline.push(debrief, conditional_full_debrief);
 
 jsPsych.run(timeline);
