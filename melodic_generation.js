@@ -11,13 +11,11 @@ var trial_stimuli;
 
 // arrays holding information for low stimuli
 var low_pitch_matching = ["stimuli/pitch_matching/pitch_matching-A2.mp3", "stimuli/pitch_matching/pitch_matching-D3.mp3", "stimuli/pitch_matching/pitch_matching-G3.mp3"];
-var low_pitch_matching_hz = [110, 146.83, 196];
 var low_stimuli = ["stimuli/low/seed_1-gen_0-low.mp3", "stimuli/low/seed_2-gen_0-low.mp3", "stimuli/low/seed_3-gen_0-low.mp3", "stimuli/low/seed_4-gen_0-low.mp3"];
 
 
 // arrays holding information for high stimuli
 var high_pitch_matching = ["stimuli/pitch_matching/pitch_matching-A3.mp3", "stimuli/pitch_matching/pitch_matching-D4.mp3", "stimuli/pitch_matching/pitch_matching-G4.mp3"];
-var high_pitch_matching_hz = [220, 293.66, 392];
 var high_stimuli = ["stimuli/high/seed_1-gen_0-high.mp3", "stimuli/high/seed_2-gen_0-high.mp3", "stimuli/high/seed_3-gen_0-high.mp3", "stimuli/high/seed_4-gen_0-high.mp3"];
 
 
@@ -114,7 +112,6 @@ var range_q = {
             pitch_matching_stimuli = {
                 file: low_pitch_matching,
                 name: low_pitch_matching.map(get_pitch),
-                hz: low_pitch_matching_hz
             };
             practice_stimulus = {
                 file: ["stimuli/practice-low.mp3"],
@@ -130,7 +127,6 @@ var range_q = {
             pitch_matching_stimuli = {
                 file: high_pitch_matching,
                 name: high_pitch_matching.map(get_pitch),
-                hz: high_pitch_matching_hz
             };
             practice_stimulus = {
                 file: ["stimuli/practice-high.mp3"],
@@ -185,18 +181,15 @@ var pitch_matching_procedure = {
     timeline_variables: [
         {
             "file": function () { return pitch_matching_stimuli.file[0] },
-            "pitch": function () { return pitch_matching_stimuli.name[0] },
-            "hz": function() { return pitch_matching_stimuli.hz[0]}
+            "pitch": function () { return pitch_matching_stimuli.name[0] }
         },
         {
             "file": function () { return pitch_matching_stimuli.file[1] },
-            "pitch": function () { return pitch_matching_stimuli.name[1] },
-            "hz": function() { return pitch_matching_stimuli.hz[1]}
+            "pitch": function () { return pitch_matching_stimuli.name[1] }
         },
         {
             "file": function () { return pitch_matching_stimuli.file[2] },
-            "pitch": function () { return pitch_matching_stimuli.name[2] },
-            "hz": function() { return pitch_matching_stimuli.hz[2]}
+            "pitch": function () { return pitch_matching_stimuli.name[2] }
         }
     ],
     randomize_order: true
