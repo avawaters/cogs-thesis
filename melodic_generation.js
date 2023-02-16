@@ -20,9 +20,9 @@ var high_stimuli = ["stimuli/high/seed_1-gen_0-high.mp3", "stimuli/high/seed_2-g
 
 
 // capture info from Prolific
-//const subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
-const subject_id = jsPsych.randomization.randomID(10);
-const fname = `test-${subject_id}.json`;
+const subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
+// EDIT FOR EACH GENERATION
+const fname = `gen_0-${subject_id}.json`;
 
 //jsPsych.data.addProperties({ subject_id: subject_id });
 
@@ -65,7 +65,7 @@ var consent_q = {
 
 var no_consent = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: "<p>Unfortunately, you cannot participate in this experiment without use of the microphone.</p><p>Thank you for your interest in my study!</p><a href='https://www.vassar.edu/'>CLICK HERE</a> to return to Prolific",
+    stimulus: "<p>Unfortunately, you cannot participate in this experiment without use of the microphone.</p><p>Thank you for your interest in my study!</p><a href='https://app.prolific.co/submissions/complete?cc=C17LNSMB'>CLICK HERE</a> to return to Prolific",
     choices: "NO_KEYS"
 };
 
@@ -153,9 +153,7 @@ var pitch_matching_tone = {
     stimulus: jsPsych.timelineVariable("file"),
     prompt: "<img src='images/note.png' widtht=500, height=500></img>",
     choices: "NO_KEYS",
-    trial_ends_after_audio: true,
-    // AVA DELETE AFTER GETTING TEST DATA
-    on_start: function () { console.log(jsPsych.timelineVariable("pitch")) }
+    trial_ends_after_audio: true
 };
 
 var pitch_matching_response = {
@@ -170,7 +168,7 @@ var pitch_matching_response = {
     on_finish: function (data) {
         // filename example: gen0-1234-A2.webm
         // EDIT FOR EACH GENERATION
-        const filename = `test-${subject_id}-${data.pitch}.webm`;
+        const filename = `gen_0-${subject_id}-${data.pitch}.webm`;
         jsPsychPipe.saveBase64Data("QfKXr6jPLyzT", filename, data.response);
         // delete the base64 data to save space. store the filename instead.
         data.response = null;
@@ -250,9 +248,7 @@ var first_listen = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: "1st Listen...",
     choices: "NO_KEYS",
-    trial_duration: 3000,
-    //  AVA DELETE AFTER TESTING
-    on_finish: function () { console.log(jsPsych.timelineVariable("melody")) }
+    trial_duration: 3000
 };
 
 var second_listen = {
@@ -295,7 +291,7 @@ var trial_response = {
     on_finish: function (data) {
         // filename example: gen0-1234-seed_1.webm
         // EDIT FOR EACH GENERATION
-        const filename = `test-${subject_id}-${data.melody}.webm`;
+        const filename = `gen_0-${subject_id}-${data.melody}.webm`;
         jsPsychPipe.saveBase64Data("QfKXr6jPLyzT", filename, data.response);
         // delete the base64 data to save space. store the filename instead.
         data.response = null;
@@ -408,7 +404,7 @@ var debrief = {
     // Get button selected
     on_finish: function (data) {
         if (data.response == 1) {
-            window.location.href = "https://www.vassar.edu/";
+            window.location.href = "https://app.prolific.co/submissions/complete?cc=C3TGJ83U";
         }
     }
 };
@@ -417,7 +413,7 @@ var debrief = {
 var full_debrief = {
     type: jsPsychHtmlKeyboardResponse,
     // When the melodies diverge: You heard two melodies that continued in an unpredictable way and two that continued in a predictable way. Your responses will be used to determine how the melody should continue past this point, filling them in with the most predictable notes. Once the melodies are complete, 
-    stimulus: "<p>This experiment is exploring the relationship between melodic predictability and listener pleasure. You are a part of the group that is writing these melodies. Your responses will help determine what the predictable notes are, and at one point where there is a strong sense of what note comes next, the melody will continue a different way. After the melodies have been continued past this point of divergence, another group of participants will rate how much they enjoy all 8 melodies (predictable and unpredictable versions of 4 different melodies). Their responses will be analyzed to investigate if there is any relationship between their ratings and whether the melody had a point of unpredictability or not. </p><a href='https://www.vassar.edu/'>CLICK HERE</a> to return to Prolific and complete the study.",
+    stimulus: "<p>This experiment is exploring the relationship between melodic predictability and listener pleasure. You are a part of the group that is writing these melodies. Your responses will help determine what the predictable notes are, and at one point where there is a strong sense of what note comes next, the melody will continue a different way. After the melodies have been continued past this point of divergence, another group of participants will rate how much they enjoy all 8 melodies (predictable and unpredictable versions of 4 different melodies). Their responses will be analyzed to investigate if there is any relationship between their ratings and whether the melody had a point of unpredictability or not. </p><a href='https://app.prolific.co/submissions/complete?cc=C3TGJ83U'>CLICK HERE</a> to return to Prolific and complete the study.",
     choices: "NO_KEYS"
 };
 
