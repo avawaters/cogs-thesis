@@ -424,7 +424,7 @@ var full_debrief = {
 var conditional_full_debrief = {
     timeline: [full_debrief],
     conditional_function: function () {
-        return (jsPsych.data.get().last(1).values()[0].response.Q0 == 0);
+        return (jsPsych.data.get().last(1).values()[0].response == 0);
     }
 }
 
