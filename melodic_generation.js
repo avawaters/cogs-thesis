@@ -43,7 +43,7 @@ timeline.push(welcome);
 
 var instructions = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: "<p>In this experiment, you will listen to 4 melodies, each played three times.</p><p>After the third time, a microphone will pop up on the screen. When you see it, sing (using the syllable 'ta') the pitch of what you think the next note is and for how long you think the note will last. Please make sure you are in a quiet environment!</p><p>To help with the rhythm and timing, you may want to sing the end of the melody.<p>At the end of each trial, you will be asked to rate how confident you are that the note you sang is what comes next in the melody.</p>To continue, hit the 'Next' button.",
+    stimulus: "<p>In this experiment, you will listen to 4 melodies, each played three times.</p><p>After the third time, a microphone will pop up on the screen. When you see it, sing (using the syllable 'ta') what note you think comes next. Please make sure you are in a quiet environment!</p><p>To help with the rhythm and timing, you may want to sing along to the melody.<p>After you sing, you will also be asked to rate how confident you are that the note you sang is what comes next in the melody.</p>To continue, hit the 'Next' button.",
     choices: ["Next"]
 };
 
@@ -144,7 +144,7 @@ timeline.push(range_q);
 
 var pitch_matching_instructions = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: "<p>In the following section, you will hear 3 tones. When the microphone pops up, please try to sing (using the syllable 'ta') back the same pitch you hear.</p>Click the 'Continue' button to start.",
+    stimulus: "<p>In the following section, you will hear 3 tones. When you see the microphone, please try to sing (using the syllable 'ta') back the same pitch you hear.</p>Click the 'Continue' button to start.",
     choices: ["Continue"]
 };
 
@@ -208,7 +208,7 @@ var lessons_q = {
     type: jsPsychSurveyMultiChoice,
     questions: [
         {
-            prompt: "Have you taken music lessons?",
+            prompt: "Have you taken formal music lessons or claasses?",
             options: ["No", "Yes"],
             required: true,
             horizontal: true
@@ -302,7 +302,7 @@ var confidence_response = {
     type: jsPsychSurveyLikert,
     questions: [
         {
-            prompt: "On a scale of 1-7, how confident are you that the pitch you sang is how the melody continues?",
+            prompt: "How confident are you that the note you sang is how the melody continues?",
             labels: ["1\n(note was practically\nchosen at random)", "2", "3", "4", "5", "6", "7\n(very confident)"],
             required: true
         }
