@@ -43,7 +43,7 @@ timeline.push(welcome);
 
 var instructions = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: "<p>In this experiment, you will listen to 4 melodies, each played three times.</p><p>After the third time, a microphone will pop up on the screen. When you see it, sing (using the syllable 'ta') what note you think comes next. Please make sure you are in a quiet environment!</p><p>To help with the rhythm and timing, you may want to sing along to the melody.<p>After you sing, you will also be asked to rate how confident you are that the note you sang is what comes next in the melody.</p>To continue, hit the 'Next' button.",
+    stimulus: "<p>In this experiment, you will listen to 4 melodies, each played three times.</p><p>After the third time, a <b>microphone</b> will pop up on the screen. When you see it, <b>sing (using the syllable 'ta') what note you think comes next.</b></p><p>Please make sure you are in a quiet environment!</p><p>After you sing, you will be asked to rate how confident you are that the note you sang is what comes next in the melody.</p>To continue, hit the 'Next' button.",
     choices: ["Next"]
 };
 
