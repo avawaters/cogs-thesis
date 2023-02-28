@@ -11,12 +11,12 @@ var trial_stimuli;
 
 // arrays holding information for low stimuli
 var low_pitch_matching = ["stimuli/pitch_matching/pitch_matching-A2.mp3", "stimuli/pitch_matching/pitch_matching-D3.mp3", "stimuli/pitch_matching/pitch_matching-G3.mp3"];
-var low_stimuli = ["stimuli/low/seed_1-gen_0-low.mp3", "stimuli/low/seed_2-gen_0-low.mp3", "stimuli/low/seed_3-gen_0-low.mp3", "stimuli/low/seed_4-gen_0-low.mp3"];
+var low_stimuli = ["stimuli/low/seed_1p-gen_0-low.mp3", "stimuli/low/seed_2p-gen_0-low.mp3", "stimuli/low/seed_3p-gen_0-low.mp3", "stimuli/low/seed_4p-gen_0-low.mp3"];
 
 
 // arrays holding information for high stimuli
 var high_pitch_matching = ["stimuli/pitch_matching/pitch_matching-A3.mp3", "stimuli/pitch_matching/pitch_matching-D4.mp3", "stimuli/pitch_matching/pitch_matching-G4.mp3"];
-var high_stimuli = ["stimuli/high/seed_1-gen_0-high.mp3", "stimuli/high/seed_2-gen_0-high.mp3", "stimuli/high/seed_3-gen_0-high.mp3", "stimuli/high/seed_4-gen_0-high.mp3"];
+var high_stimuli = ["stimuli/high/seed_1p-gen_0-high.mp3", "stimuli/high/seed_2p-gen_0-high.mp3", "stimuli/high/seed_3p-gen_0-high.mp3", "stimuli/high/seed_4p-gen_0-high.mp3"];
 
 
 // capture info from Prolific
