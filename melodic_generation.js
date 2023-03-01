@@ -324,7 +324,7 @@ var conditional_intermission = {
     timeline: [trial_intermission],
     conditional_function: function () {
         // Determine if the subject is on the last melody 
-        return (jsPsych.data.get().filter({task: "confidence"}).count() < 4);
+        return (jsPsych.data.get().filter({task: "confidence"}).count() < 5);
     }
 };
 
