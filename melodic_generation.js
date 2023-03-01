@@ -336,7 +336,7 @@ var practice_instructions = {
 
 var practice_end = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: "<p>You've completed the practice trial!</p>When you are ready to move onto the experiment, click the 'Start' button.",
+    stimulus: "<p>You've completed the practice trial!</p><p>When you are ready to move onto the experiment, click the 'Start' button.</p>Remember to only sing the note you think comes next.",
     choices: ["Start"]
 };
 
