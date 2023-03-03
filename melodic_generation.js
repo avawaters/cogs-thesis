@@ -170,8 +170,6 @@ var pitch_matching_response = {
         // EDIT FOR EACH GENERATION
         const filename = `gen_0-${subject_id}-${data.pitch}.webm`;
         jsPsychPipe.saveBase64Data("QfKXr6jPLyzT", filename, data.response);
-        // delete the base64 data to save space. store the filename instead.
-        data.response = null;
     }
 };
 
