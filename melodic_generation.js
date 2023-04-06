@@ -13,21 +13,19 @@ var trial_stimuli;
 // arrays holding information for low stimuli
 var low_pitch_matching = ["stimuli/pitch_matching/pitch_matching-A2.mp3", "stimuli/pitch_matching/pitch_matching-D3.mp3", "stimuli/pitch_matching/pitch_matching-G3.mp3"];
 //EDIT EACH GEN
-var low_stimuli = ["stimuli/low/seed_1p-gen_1-low.mp3", "stimuli/low/seed_2p-gen_1-low.mp3", "stimuli/low/seed_3p-gen_1-low.mp3", "stimuli/low/seed_4p-gen_1-low.mp3"];
+var low_stimuli = ["stimuli/low/seed_1p-gen_2-low.mp3", "stimuli/low/seed_2p-gen_2-low.mp3", "stimuli/low/seed_3p-gen_2-low.mp3", "stimuli/low/seed_4p-gen_2-low.mp3"];
 
 
 // arrays holding information for high stimuli
 var high_pitch_matching = ["stimuli/pitch_matching/pitch_matching-A3.mp3", "stimuli/pitch_matching/pitch_matching-D4.mp3", "stimuli/pitch_matching/pitch_matching-G4.mp3"];
 //EDIT EACH GEN
-var high_stimuli = ["stimuli/high/seed_1p-gen_1-high.mp3", "stimuli/high/seed_2p-gen_1-high.mp3", "stimuli/high/seed_3p-gen_1-high.mp3", "stimuli/high/seed_4p-gen_1-high.mp3"];
+var high_stimuli = ["stimuli/high/seed_1p-gen_2-high.mp3", "stimuli/high/seed_2p-gen_2-high.mp3", "stimuli/high/seed_3p-gen_2-high.mp3", "stimuli/high/seed_4p-gen_2-high.mp3"];
 
 
 // capture info from Prolific
 const subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
 //EDIT EACH GEN
-const fname = `gen_1-${subject_id}.json`;
-
-//jsPsych.data.addProperties({ subject_id: subject_id });
+const fname = `gen_2-${subject_id}.json`;
 
 /**************************************** EXPERIMENT EVENTS ****************************************/
 var preload = {
@@ -171,7 +169,7 @@ var pitch_matching_response = {
     on_finish: function (data) {
         // filename example: gen0-1234-A2.webm
         //EDIT EACH GEN
-        const filename = `gen_1-${subject_id}-${data.pitch}.webm`;
+        const filename = `gen_2-${subject_id}-${data.pitch}.webm`;
         jsPsychPipe.saveBase64Data("QfKXr6jPLyzT", filename, data.response);
     }
 };
@@ -292,7 +290,7 @@ var trial_response = {
     on_finish: function (data) {
         // filename example: gen0-1234-seed_1.webm
         //EDIT EACH GEN
-        const filename = `gen_1-${subject_id}-${data.melody}.webm`;
+        const filename = `gen_2-${subject_id}-${data.melody}.webm`;
         jsPsychPipe.saveBase64Data("QfKXr6jPLyzT", filename, data.response);
     }
 };
