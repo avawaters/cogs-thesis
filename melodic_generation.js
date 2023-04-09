@@ -24,27 +24,27 @@ async function createExperiment(){
 // arrays holding files for low stimuli
 var low_pitch_matching = ["stimuli/pitch_matching/pitch_matching-A2.mp3", "stimuli/pitch_matching/pitch_matching-D3.mp3", "stimuli/pitch_matching/pitch_matching-G3.mp3"];
 //EDIT EACH GEN
-var low_stimuli = [["stimuli/low/seed_1p-gen_4-low.mp3", "stimuli/low/seed_2p-gen_4-low.mp3",
-                    "stimuli/low/seed_3u-gen_4-low.mp3", "stimuli/low/seed_4u-gen_4-low.mp3"],
-                    ["stimuli/low/seed_1u-gen_4-low.mp3", "stimuli/low/seed_2u-gen_4-low.mp3",
-                    "stimuli/low/seed_3p-gen_4-low.mp3", "stimuli/low/seed_4p-gen_4-low.mp3"]];
+var low_stimuli = [["stimuli/low/seed_1p-gen_5-low.mp3", "stimuli/low/seed_2p-gen_5-low.mp3",
+                    "stimuli/low/seed_3u-gen_5-low.mp3", "stimuli/low/seed_4u-gen_5-low.mp3"],
+                    ["stimuli/low/seed_1u-gen_5-low.mp3", "stimuli/low/seed_2u-gen_5-low.mp3",
+                    "stimuli/low/seed_3p-gen_5-low.mp3", "stimuli/low/seed_4p-gen_5-low.mp3"]];
 
 
 
 // arrays holding files for high stimuli
 var high_pitch_matching = ["stimuli/pitch_matching/pitch_matching-A3.mp3", "stimuli/pitch_matching/pitch_matching-D4.mp3", "stimuli/pitch_matching/pitch_matching-G4.mp3"];
 //EDIT EACH GEN
-var high_stimuli = [["stimuli/high/seed_1p-gen_4-high.mp3", "stimuli/high/seed_2p-gen_4-high.mp3",
-                    "stimuli/high/seed_3u-gen_4-high.mp3", "stimuli/high/seed_4u-gen_4-high.mp3"],
-                    ["stimuli/high/seed_1u-gen_4-high.mp3", "stimuli/high/seed_2u-gen_4-high.mp3",
-                    "stimuli/high/seed_3p-gen_4-high.mp3", "stimuli/high/seed_4p-gen_4-high.mp3"]];
+var high_stimuli = [["stimuli/high/seed_1p-gen_5-high.mp3", "stimuli/high/seed_2p-gen_5-high.mp3",
+                    "stimuli/high/seed_3u-gen_5-high.mp3", "stimuli/high/seed_4u-gen_5-high.mp3"],
+                    ["stimuli/high/seed_1u-gen_5-high.mp3", "stimuli/high/seed_2u-gen_5-high.mp3",
+                    "stimuli/high/seed_3p-gen_5-high.mp3", "stimuli/high/seed_4p-gen_5-high.mp3"]];
 
 
 
 // capture info from Prolific
 const subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
 //EDIT EACH GEN
-const fname = `gen_4-${subject_id}.json`;
+const fname = `gen_5-${subject_id}.json`;
 
 /**************************************** EXPERIMENT EVENTS ****************************************/
 var preload = {
@@ -63,7 +63,7 @@ timeline.push(welcome);
 
 var instructions = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: "<p>In this experiment, you will listen to 4 melodies, each played three times.</p><p>After the third time, a <b>microphone</b> will pop up on the screen. When you see it, <b>sing (using the syllable 'ta') what note you think comes next.</b></p><p>Please make sure you are in a quiet environment!</p><p>After you sing, you will be asked to rate how confident you are that the note you sang is what comes next in the melody.</p>To continue, hit the 'Next' button.",
+    stimulus: "<p>In this experiment, you will listen to 4 melodies, each played three times.</p><p>After the third time, a <b>microphone</b> will pop up on the screen. When you see it, <b>sing (using the syllable 'ta') how you think the melody ends.</b></p><p>Please make sure you are in a quiet environment!</p><p>After you sing, you will be asked to rate how confident you are that the note you sang is the last note in the melody.</p>To continue, hit the 'Next' button.",
     choices: ["Next"]
 };
 
@@ -188,7 +188,7 @@ var pitch_matching_response = {
     on_finish: function (data) {
         // filename example: gen0-1234-A2.webm
         //EDIT EACH GEN
-        const filename = `gen_4-${subject_id}-${data.pitch}.webm`;
+        const filename = `gen_5-${subject_id}-${data.pitch}.webm`;
         jsPsychPipe.saveBase64Data("QfKXr6jPLyzT", filename, data.response);
     }
 };
@@ -309,7 +309,7 @@ var trial_response = {
     on_finish: function (data) {
         // filename example: gen0-1234-seed_1.webm
         //EDIT EACH GEN
-        const filename = `gen_4-${subject_id}-${data.melody}.webm`;
+        const filename = `gen_5-${subject_id}-${data.melody}.webm`;
         jsPsychPipe.saveBase64Data("QfKXr6jPLyzT", filename, data.response);
     }
 };
@@ -318,7 +318,7 @@ var confidence_response = {
     type: jsPsychSurveyLikert,
     questions: [
         {
-            prompt: "How confident are you that the note you sang is how the melody continues?",
+            prompt: "How confident are you that the note you sang is how the melody ends?",
             labels: ["1\n(note was practically\nchosen at random)", "2", "3", "4", "5", "6", "7\n(very confident)"],
             required: true
         }
@@ -352,7 +352,7 @@ var practice_instructions = {
 
 var practice_end = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: "<p>You've completed the practice trial!</p><p>When you are ready to move onto the experiment, click the 'Start' button.</p>Remember to only sing the note you think comes next (<b>not</b> the entire melody).",
+    stimulus: "<p>You've completed the practice trial!</p><p>When you are ready to move onto the experiment, click the 'Start' button.</p>Remember to only sing the note you think finishes the melody (<b>not</b> the entire melody).",
     choices: ["Start"]
 };
 
@@ -428,8 +428,8 @@ var debrief = {
 // give detailed debriefing to participant
 var full_debrief = {
     type: jsPsychHtmlKeyboardResponse,
-    // When the melodies diverge: You heard two melodies that continued in an unpredictable way and two that continued in a predictable way. Your responses will be used to determine how the melody should continue past this point, filling them in with the most predictable notes. Once the melodies are complete, 
-    stimulus: "<p>This experiment is exploring the relationship between melodic predictability and listener pleasure. You are a part of the group that is writing these melodies. Your responses will help determine what the predictable notes are, and at one point where there is a strong sense of what note comes next, the melody will continue in a different way. After the melodies have been continued past this point of divergence, another group of participants will rate how much they enjoy all 8 melodies (predictable and unpredictable versions of 4 different melodies). Their responses will be analyzed to investigate if there is any relationship between their ratings and whether the melody had a point of unpredictability or not. </p><a href='https://app.prolific.co/submissions/complete?cc=C3TGJ83U'>CLICK HERE</a> to return to Prolific and complete the study.",
+    // When the melodies diverge: 
+    stimulus: "<p>This experiment is exploring the relationship between melodic predictability and listener pleasure. You are a part of the group that is writing these melodies. You heard two melodies that continued in an unpredictable way and two that continued in a predictable way. Your responses will be used to determine how the melody should continue past this point, filling them in with the most predictable notes. Once the melodies are complete, another group of participants will rate how much they enjoy all 8 melodies (predictable and unpredictable versions of the 4 different melodies). Their responses will be analyzed to investigate if there is any relationship between their ratings and whether the melody had a point of unpredictability or not. </p><a href='https://app.prolific.co/submissions/complete?cc=C3TGJ83U'>CLICK HERE</a> to return to Prolific and complete the study.",
     choices: "NO_KEYS"
 };
 
